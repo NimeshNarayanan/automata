@@ -9,7 +9,7 @@ public class DFA {
     private final String finalState;
     private String currentState;
 
-    public DFA(ArrayList<String> alphabets, ArrayList<String> states, ArrayList<Transition> transitions, String initialState, String finalState) {
+    private DFA(ArrayList<String> alphabets, ArrayList<String> states, ArrayList<Transition> transitions, String initialState, String finalState) {
 
         this.alphabets = alphabets;
         this.states = states;
@@ -18,16 +18,30 @@ public class DFA {
         this.finalState = finalState;
         this.currentState = null;
     }
-
-    public boolean isLanguagePasses() {
+    public static DFA factory(ArrayList<String> alphabets, ArrayList<String> states, ArrayList<Transition> transitions, String initialState, String finalState) throws Exception {
         if (alphabets.isEmpty() || states.isEmpty()){
+            throw new Exception("Invalid DFA");
+        }
+        return new DFA(alphabets,states,transitions,initialState,finalState);
+    }
+
+
+    public boolean isLanguagePasses(String string) {
+        if(string.isEmpty()) {
             return false;
         }
-        for (int i = 0; i < alphabets.size(); i++) {
-            if (currentState == null)
-                this.currentState =this.getNextState(initialState,alphabets.get(i),transitions);
-            else
-                this.currentState = this.getNextState(currentState,alphabets.get(i),transitions);
+        String[] alphabets  = string.split("");
+
+        for (int i = 0; i < alphabets.length; i++) {
+            if(!this.alphabets.contains(alphabets[i])) {
+                return false;
+            }
+            if (currentState == null) {
+                this.currentState =this.getNextState(initialState, alphabets[i],transitions);
+            }
+            else {
+                this.currentState = this.getNextState(currentState, alphabets[i],transitions);
+            }
 
         }
         if (currentState == this.finalState)
