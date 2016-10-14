@@ -33,15 +33,12 @@ public class DFA {
         String[] alphabets  = string.split("");
 
         for (int i = 0; i < alphabets.length; i++) {
-            if(!this.alphabets.contains(alphabets[i])) {
+            if(!this.alphabets.contains(alphabets[i]))
                 return false;
-            }
-            if (currentState == null) {
+            if (currentState == null)
                 this.currentState =this.getNextState(initialState, alphabets[i],transitions);
-            }
-            else {
+            else
                 this.currentState = this.getNextState(currentState, alphabets[i],transitions);
-            }
 
         }
         if (currentState == this.finalState)
