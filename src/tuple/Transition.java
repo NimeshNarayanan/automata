@@ -1,8 +1,5 @@
 package tuple;
 
-/**
- * Created by nimesh on 10/11/16.
- */
 public class Transition {
     private final String current_state;
     private final String alphabet;
