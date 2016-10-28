@@ -14,18 +14,18 @@ import static java.lang.System.out;
 
 public class JSONParserHelper {
 
-    public static List<DataHolder> parseJson(String s) throws Exception {
-        if (s.isEmpty())
+    public static List<DataHolder> parseJson(String data) throws Exception {
+        if (data.isEmpty())
             throw new Exception("No content error.");
         ObjectMapper mapper = new ObjectMapper();
-        List<DataHolder> data = mapper.readValue(parseToJonString(s), new TypeReference<List<DataHolder>>(){});
-        return data;
+        List<DataHolder> dataHolders = mapper.readValue(parseToJonString(data), new TypeReference<List<DataHolder>>(){});
+        return dataHolders;
     }
 
-    private static String parseToJonString(String s) throws IOException, ParseException {
-        String dataString = s;
-        if(new File(s).exists()) {
-            File file = new File(s);
+    private static String parseToJonString(String data) throws IOException, ParseException {
+        String dataString = data;
+        if(new File(data).exists()) {
+            File file = new File(data);
             dataString = String.join("\n", Files.readAllLines(Paths.get(String.valueOf(file))));
         }
         if (dataString.contains("\\")) {

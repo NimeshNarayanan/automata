@@ -25,7 +25,7 @@ public class JSONParserHelperTest {
     public void Test_should_parse_json_file_to_an_object() throws Exception {
         String s = "./data/test_data.json";
         List<DataHolder> dataHolders = JSONParserHelper.parseJson(s);
-        assertEquals(dataHolders.size(),1);
+        assertEquals(6,dataHolders.size());
         assertTrue(dataHolders.get(0) instanceof DataHolder);
     }
 
@@ -33,7 +33,7 @@ public class JSONParserHelperTest {
     public void Test_should_parse_json_formated_string_to_an_object() throws Exception {
         String path = "./data/test_json.json";
         List<DataHolder> dataHolders = JSONParserHelper.parseJson(path);
-        assertEquals(dataHolders.size(),1);
+        assertEquals(1,dataHolders.size());
         assertTrue(dataHolders.get(0) instanceof DataHolder);
     }
 
